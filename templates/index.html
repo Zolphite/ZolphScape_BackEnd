@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ZolphSpace</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body data-spy="scroll" data-target="#menu">
+	<!-- Start of the Home Section -->
+	<div id="home">
+		<!-- Navigation -->
+		<nav class="navbar navbar-dark navbar-expand-md fixed-top">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<!-- <img src="static/assets/img/nest.png"> -->
+					<strong>ZolphSpace</strong>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="menu">
+					<ul class="navbar-nav ml-auto">
+						<!-- Navigation Menu Choices -->
+						<li class="nav-item">
+							<a class="nav-link" href="#home">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#about">About</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#portfolio">Portfolio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#testimonials">Testimonials</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#contact">Contact Us</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- Start Landing Page -->
+		<div class="landing">
+			<div class="home-wrap">
+				<div class="home-inner">
+
+				</div>
+			</div>
+		</div> <!-- End Landing Page-->
+		<!-- Start Landing Page Caption -->
+		<div class="caption center-block text-center">
+			<h3>ZolphSpace</h3>
+			<a class="btn btn-outline-light" href="#about">Learn More</a>
+		</div> <!-- End Landing Page Caption-->
+	</div> <!-- End Home Section-->
+<!-- Start Portfolio Section -->
+<div id="portfolio">
+	<div class="container-fluid padding">
+		<h3 class="heading">Dash Tests</h3>
+		<div class="row no-padding">
+			<div class="col-md-6" id="app">
+				<!-- <img class="portfolio" src="static/assets/img/1.png"> -->
+				<h1>[[ band.title ]] [[ api_test_string ]]</h1>
+			</div>
+		</div>
+	</div>
+<!-- Start Contact Section -->
+<div id="contact">
+	<div class="container-fluid footer">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6 text-center">
+				<!-- <img src="static/assets/img/nest.png"> -->
+				<strong class="contact-heading">ZOLPHSPACE</strong>
+				<p>GoodBye</p>
+			</div>
+		</div>
+	</div>
+</div> <!-- End Contact Section -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!--- Script Source Files -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!-- Vue get latest version JS-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+<!-- creating Veu app obj -->
+<script>
+	var app = new Vue({
+		el : '#app',
+		delimiters : ['[[',']]'],
+		data : {
+			band: {},
+			api_test_string: ""
+		},
+		mounted: function() {
+			this.fetchData();
+		},
+		methods: {
+			fetchData: function () 
+			{
+				//Get RESTful resourse data from /test endpoint.
+				this.$http.get('/test').then(response => {
+					console.log(response.body);
+					this.band = response.body;
+				}, response => {
+					console.log("an error occurred with getting response data");
+				});
+
+				this.$http.get('/api/test').then(response => {
+					console.log(response.body);
+					this.api_test_string = response.body;
+				}, response => {
+					console.log("an error occurred with getting response data");
+				});
+			}
+		}
+	})
+</script>
+</body>
+</html>
